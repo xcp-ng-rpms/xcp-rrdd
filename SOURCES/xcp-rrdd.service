@@ -1,0 +1,15 @@
+[Unit]
+Description=XCP RRD daemon
+After=forkexecd.service xenstored.socket message-switch.service syslog.target
+Wants=forkexecd.service xenstored.socket message-switch.service syslog.target
+
+[Service]
+Type=notify
+Environment=OCAMLRUNPARAM=b
+EnvironmentFile=-/etc/sysconfig/xcp-rrdd
+ExecStart=/usr/sbin/xcp-rrdd $XCP_RRDD_OPTIONS
+SuccessExitStatus=0 1
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
