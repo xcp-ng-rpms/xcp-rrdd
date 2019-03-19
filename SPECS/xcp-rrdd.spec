@@ -1,11 +1,11 @@
 Name:           xcp-rrdd
-Version:        1.6.0
+Version:        1.9.0
 Release:        4%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
 Source0:        https://code.citrite.net/rest/archive/latest/projects/XSU/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.6.0&format=tar.gz&prefix=xcp-rrdd-1.6.0#/xcp-rrdd-1.6.0.tar.gz) = 8ecde00d51f77614c16052f39e74b11e5415df35
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.9.0&format=tar.gz&prefix=xcp-rrdd-1.9.0#/xcp-rrdd-1.9.0.tar.gz) = 4b2158731be2218d50c8005c01b668ea2b17c6f9
 Source1:        xcp-rrdd.service
 Source2:        xcp-rrdd-sysconfig
 Source3:        xcp-rrdd-conf
@@ -67,6 +67,21 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Tue May 29 2018 Christian Lindig <christian.lindig@citrix.com> - 1.9.0-1
+- rrdd: update interface for fd-send-recv >= 2.0.0
+- opam: update dependencies bound
+
+* Thu May 24 2018 Christian Lindig <christian.lindig@citrix.com> - 1.8.0-1
+- rrdd: make safe-strings compliant
+
+* Thu May 10 2018 Christian Lindig <christian.lindig@citrix.com> - 1.7.0-1
+- CP-26583: Update error handling to use PPX-based IDL
+- CP-26583: Update RRDD Server and Client references to use PPX IDL
+- CP-26583: Define server-impl RPC bindings for API calls
+- CP-26583: Match API call signatures to RPC bindings
+- CP-26583: Update API calls in RRDD to use new signatures
+- CP-26583: ocp-indent xcp-rrdd
+
 * Thu Mar 15 2018 Christian Lindig <christian.lindig@citrix.com> - 1.6.0-1
 - CA-277850 Replace xenops library with ezxenstore
 
