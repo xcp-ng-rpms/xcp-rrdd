@@ -1,17 +1,20 @@
 Name:           xcp-rrdd
-Version:        1.9.0
-Release:        4%{?dist}
+Version:        1.14.0
+Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
-Source0:        https://code.citrite.net/rest/archive/latest/projects/XSU/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.9.0&format=tar.gz&prefix=xcp-rrdd-1.9.0#/xcp-rrdd-1.9.0.tar.gz) = 4b2158731be2218d50c8005c01b668ea2b17c6f9
-Source1:        xcp-rrdd.service
-Source2:        xcp-rrdd-sysconfig
-Source3:        xcp-rrdd-conf
-Source4:        xcp-rrdd-tmp
+
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.14.0&format=tar.gz&prefix=xcp-rrdd-1.14.0#/xcp-rrdd-1.14.0.tar.gz
+Source1: SOURCES/xcp-rrdd/xcp-rrdd.service
+Source2: SOURCES/xcp-rrdd/xcp-rrdd-sysconfig
+Source3: SOURCES/xcp-rrdd/xcp-rrdd-conf
+Source4: SOURCES/xcp-rrdd/xcp-rrdd-tmp
+
+
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.14.0&format=tar.gz&prefix=xcp-rrdd-1.14.0#/xcp-rrdd-1.14.0.tar.gz) = bd3d36e4850b0cab021eb347b5792ce8f545d7db
+
 BuildRequires:  xs-opam-repo
-BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-xcp-idl-devel
@@ -67,6 +70,23 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Wed Jan 23 2019 Christian Lindig <christian.lindig@citrix.com> - 1.14.0-1
+- Prepare for Dune 1.6
+- Update Travis configuration
+- Add ezxenstore dependency to opam
+
+* Fri Jan 11 2019 Christian Lindig <christian.lindig@citrix.com> - 1.13.0-1
+- Use xapi-rrd; rrd is being deprecated.
+
+* Tue Dec 04 2018 Christian Lindig <christian.lindig@citrix.com> - 1.12.0-1
+- Moved from jbuilder to dune and deprecated xxp in favour of xapi-idl.
+
+* Fri Nov 16 2018 Christian Lindig <christian.lindig@citrix.com> - 1.11.0-1
+- New ocaml-rpc
+
+* Fri Aug 31 2018 Christian Lindig <christian.lindig@citrix.com> - 1.10.0-1
+- Simplify PPX processing in jbuild file
+
 * Tue May 29 2018 Christian Lindig <christian.lindig@citrix.com> - 1.9.0-1
 - rrdd: update interface for fd-send-recv >= 2.0.0
 - opam: update dependencies bound
