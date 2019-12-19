@@ -1,18 +1,18 @@
 Name:           xcp-rrdd
-Version:        1.14.0
+Version:        1.24.0
 Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.14.0&format=tar.gz&prefix=xcp-rrdd-1.14.0#/xcp-rrdd-1.14.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.24.0&format=tar.gz&prefix=xcp-rrdd-1.24.0#/xcp-rrdd-1.24.0.tar.gz
 Source1: SOURCES/xcp-rrdd/xcp-rrdd.service
 Source2: SOURCES/xcp-rrdd/xcp-rrdd-sysconfig
 Source3: SOURCES/xcp-rrdd/xcp-rrdd-conf
 Source4: SOURCES/xcp-rrdd/xcp-rrdd-tmp
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.14.0&format=tar.gz&prefix=xcp-rrdd-1.14.0#/xcp-rrdd-1.14.0.tar.gz) = bd3d36e4850b0cab021eb347b5792ce8f545d7db
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.24.0&format=tar.gz&prefix=xcp-rrdd-1.24.0#/xcp-rrdd-1.24.0.tar.gz) = f270b3cd60647e3188bb246ea8523b4590410c40
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
@@ -38,6 +38,9 @@ Statistics gathering daemon for the xapi toolstack.
 
 %build
 make
+
+%check
+make test
 
 %pre
 getent group rrdmetrics >/dev/null || groupadd -r rrdmetrics
@@ -70,6 +73,52 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Wed Sep 18 2019 Christian Lindig <christian.lindig@citrix.com> - 1.24.0-1
+- CA-327028: Cleanup function for calculating per-cpu usage
+- CA-327028: Work around a incorrect values of vcputime
+
+* Fri Aug 23 2019 Edwin Török <edvin.torok@citrix.com> - 1.23.0-2
+- bump packages after xs-opam update
+
+* Mon Aug 12 2019 Christian Lindig <christian.lindig@citrix.com> - 1.23.0-1
+- Drop rpc dependency
+- use more granular dependencies
+
+* Mon Jul 29 2019 Christian Lindig <christian.lindig@citrix.com> - 1.22.0-1
+- CA-322045: log skipped plugins outside of the lock at debug level
+- CA-322045: skip /dev/shm/metrics/tap-
+
+* Tue Jul 23 2019 Rob Hoes <rob.hoes@citrix.com> - 1.21.0-1
+- CA-322045: Enable fastpath for xcp-rrdd http server
+
+* Mon Jul 01 2019 Christian Lindig <christian.lindig@citrix.com> - 1.20.0-1
+- maintenance: remove unused files from the root
+- maintenance: remove INSTALL
+
+* Tue May 14 2019 Christian Lindig <christian.lindig@citrix.com> - 1.19.0-1
+- CP-30614 Eliminate xapi's dependency on libxenctrl
+- CP-315465: pre-allocate enough pages for mem_vm writer
+
+* Thu May 02 2019 Christian Lindig <christian.lindig@citrix.com> - 1.18.0-1
+- Revert merge psafont/CP-30614
+
+* Mon Apr 29 2019 Christian Lindig <christian.lindig@citrix.com> - 1.17.0-1
+- XSI-283 add GC logging
+
+* Wed Mar 20 2019 Christian Lindig <christian.lindig@citrix.com> - 1.16.0-1
+- CP-30614: decouple stats generation from consolidation
+- CP-30614: Do not register self-written files
+- CP-30614: Incorporate RRD filewriters
+- CP-30614: prefix files for easier identification
+- CP-30614: Prepare for file-writing stats within the monitor loop
+- CP-30614: Rename written DSS files
+- CP-30614: Write files for memory stats
+
+
+* Thu Mar 14 2019 Christian Lindig <christian.lindig@citrix.com> - 1.15.0-1
+- Fix: Masking real dss with fake ones doesn't supress all of them
+- maintenance: remove fake modules
+
 * Wed Jan 23 2019 Christian Lindig <christian.lindig@citrix.com> - 1.14.0-1
 - Prepare for Dune 1.6
 - Update Travis configuration
