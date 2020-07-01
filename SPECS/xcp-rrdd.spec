@@ -1,24 +1,23 @@
 Name:           xcp-rrdd
-Version:        1.24.0
+Version:        1.33.0
 Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.24.0&format=tar.gz&prefix=xcp-rrdd-1.24.0#/xcp-rrdd-1.24.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.33.0&format=tar.gz&prefix=xcp-rrdd-1.33.0#/xcp-rrdd-1.33.0.tar.gz
 Source1: SOURCES/xcp-rrdd/xcp-rrdd.service
 Source2: SOURCES/xcp-rrdd/xcp-rrdd-sysconfig
 Source3: SOURCES/xcp-rrdd/xcp-rrdd-conf
 Source4: SOURCES/xcp-rrdd/xcp-rrdd-tmp
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.24.0&format=tar.gz&prefix=xcp-rrdd-1.24.0#/xcp-rrdd-1.24.0.tar.gz) = f270b3cd60647e3188bb246ea8523b4590410c40
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.33.0&format=tar.gz&prefix=xcp-rrdd-1.33.0#/xcp-rrdd-1.33.0.tar.gz) = 9a6f6ef807813d22c6635d0ebfc6433e105b7463
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-rrd-transport-devel
 BuildRequires:  xen-devel
 BuildRequires:  xen-dom0-libs-devel
@@ -73,6 +72,50 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Fri May 29 2020 Christian Lindig <christian.lindig@citrix.com> - 1.33.0-1
+- CA-335964: Do not expose temporary VM UUIDs
+
+* Tue May 19 2020 Christian Lindig <christian.lindig@citrix.com> - 1.32.0-1
+- maintenace: prepare for ocamlformat
+- maintenance: format code with ocamlformat
+- maintenance: format comments with ocamlformat
+
+* Mon May 04 2020 Christian Lindig <christian.lindig@citrix.com> - 1.31.0-1
+- CA-338809: Update information for running VMs, not paused ones
+
+* Wed Apr 29 2020 Christian Lindig <christian.lindig@citrix.com> - 1.30.0-1
+- CA-335964: Prepare code for hiding temporary uuids
+- CA-335964: Actively mask temporary VM UUIDs from exposed metrics
+
+* Fri Mar 27 2020 Christian Lindig <christian.lindig@citrix.com> - 1.29.0-1
+- fix build -- use OASIS
+- Add opam file
+- rrddump: Update for stdext 2.0.0
+- Move text_export from xapi-rrd-unix
+- Port to jbuilder
+- Ported from jbuilder to dune and updated dependencies.
+- Do not use 'finally' from package xapi-stdext-pervasives.
+- maintenance: rrddump pointing at incorrect repo
+- Fix after rrddump merge
+- maintenance: normalize opam files
+
+* Thu Mar 12 2020 Christian Lindig <christian.lindig@citrix.com> - 1.28.0-1
+- CP-33121: stop using stdext's std and monadic modules
+- stats: use standard Mutex.execute
+- xcp_rrdd: Do not include modules into the namespace
+
+* Fri Mar 06 2020 Christian Lindig <christian.lindig@citrix.com> - 1.27.0-1
+- rrdd_server: document add functions
+- travis: use xs-opam config by default
+
+* Tue Dec 17 2019 Christian Lindig <christian.lindig@citrix.com> - 1.26.0-1
+- CA-325582 fix bug with query_possible_dss
+
+* Fri Nov 29 2019 Christian Lindig <christian.lindig@citrix.com> - 1.25.0-1
+- CA-325582: remove SR RRDs from memory after archiving
+- CA-325582: always remove VM RRDs from memory even if archiving failed
+- CA-325582: Report disabled sources
+
 * Wed Sep 18 2019 Christian Lindig <christian.lindig@citrix.com> - 1.24.0-1
 - CA-327028: Cleanup function for calculating per-cpu usage
 - CA-327028: Work around a incorrect values of vcputime
