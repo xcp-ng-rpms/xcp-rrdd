@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        1.33.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -72,6 +72,9 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Wed Jul 21 2021 Ben Anson <ben.anson@citrix.com> - 1.33.0-2
+- CA-353388 bump to include stunnel client library changes
+
 * Fri May 29 2020 Christian Lindig <christian.lindig@citrix.com> - 1.33.0-1
 - CA-335964: Do not expose temporary VM UUIDs
 
