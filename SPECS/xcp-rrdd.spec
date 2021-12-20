@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        1.33.0
-Release:        2%{?dist}
+Release:        5%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -25,6 +25,8 @@ BuildRequires:  xen-libs-devel
 BuildRequires:  blktap-devel
 BuildRequires:  systemd-devel
 #Requires:       redhat-lsb-core
+
+Requires:       libev
 Requires(pre):  shadow-utils
 
 %{?systemd_requires}
@@ -72,8 +74,17 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
-* Wed Jul 21 2021 Ben Anson <ben.anson@citrix.com> - 1.33.0-2
-- CA-353388 bump to include stunnel client library changes
+* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.33.0-5
+- Bump package for libev dependency
+
+* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.33.0-4
+- Bump package after xs-opam update
+
+* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.33.0-3
+- Bump packages after ocaml-xen-api-libs-transitional update
+
+* Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 1.33.0-2
+- bump packages after xs-opam update
 
 * Fri May 29 2020 Christian Lindig <christian.lindig@citrix.com> - 1.33.0-1
 - CA-335964: Do not expose temporary VM UUIDs
