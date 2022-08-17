@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        1.33.0
-Release:        5%{?dist}
+Release:        5.1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -74,6 +74,9 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Wed Aug 17 2022 Gael Duperrey <gduperrey@vates.fr> - 1.33.0-5.1
+- Rebuild for updated xapi from XS82ECU1011
+
 * Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.33.0-5
 - Bump package for libev dependency
 
