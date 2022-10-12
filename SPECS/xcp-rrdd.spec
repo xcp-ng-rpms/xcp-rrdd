@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        1.33.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -10,6 +10,9 @@ Source1: SOURCES/xcp-rrdd/xcp-rrdd.service
 Source2: SOURCES/xcp-rrdd/xcp-rrdd-sysconfig
 Source3: SOURCES/xcp-rrdd/xcp-rrdd-conf
 Source4: SOURCES/xcp-rrdd/xcp-rrdd-tmp
+Patch1: SOURCES/xcp-rrdd/0001-Reformat.patch
+Patch2: SOURCES/xcp-rrdd/0002-http-svr-remove-slow-path.patch
+Patch3: SOURCES/xcp-rrdd/0003-Limit-concurrent-connections-with-semaphore.patch
 
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.33.0&format=tar.gz&prefix=xcp-rrdd-1.33.0#/xcp-rrdd-1.33.0.tar.gz) = 9a6f6ef807813d22c6635d0ebfc6433e105b7463
@@ -30,6 +33,7 @@ Requires:       libev
 Requires(pre):  shadow-utils
 
 %{?systemd_requires}
+
 
 %description
 Statistics gathering daemon for the xapi toolstack.
@@ -74,6 +78,9 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Thu Sep 08 2022 Rob Hoes <rob.hoes@citrix.com> - 1.33.0-6
+- CA-368579: Mitigations against DoS attacks by unauthenticated clients
+
 * Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.33.0-5
 - Bump package for libev dependency
 
