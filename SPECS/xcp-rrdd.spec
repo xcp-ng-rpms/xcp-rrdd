@@ -1,30 +1,22 @@
+%global package_speccommit 8bfbe2378aac5b17ed94ba54e271a6701cef1618
+%global package_srccommit v1.33.2
 Name:           xcp-rrdd
-Version:        1.33.0
-Release:        6%{?dist}
+Version: 1.33.2
+Release: 1%{?xsrel}%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
-License:        LGPL
+License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-rrdd
-
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.33.0&format=tar.gz&prefix=xcp-rrdd-1.33.0#/xcp-rrdd-1.33.0.tar.gz
-Source1: SOURCES/xcp-rrdd/xcp-rrdd.service
-Source2: SOURCES/xcp-rrdd/xcp-rrdd-sysconfig
-Source3: SOURCES/xcp-rrdd/xcp-rrdd-conf
-Source4: SOURCES/xcp-rrdd/xcp-rrdd-tmp
-Patch1: SOURCES/xcp-rrdd/0001-Reformat.patch
-Patch2: SOURCES/xcp-rrdd/0002-http-svr-remove-slow-path.patch
-Patch3: SOURCES/xcp-rrdd/0003-Limit-concurrent-connections-with-semaphore.patch
-
-
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-rrdd/archive?at=v1.33.0&format=tar.gz&prefix=xcp-rrdd-1.33.0#/xcp-rrdd-1.33.0.tar.gz) = 9a6f6ef807813d22c6635d0ebfc6433e105b7463
-
+Source0: xcp-rrdd-1.33.2.tar.gz
+Source1: xcp-rrdd.service
+Source2: xcp-rrdd-sysconfig
+Source3: xcp-rrdd-conf
+Source4: xcp-rrdd-tmp
 BuildRequires:  xs-opam-repo
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-rrd-transport-devel
-BuildRequires:  xen-devel
-BuildRequires:  xen-dom0-libs-devel
-BuildRequires:  xen-libs-devel
+BuildRequires:  xen-ocaml-devel
 BuildRequires:  blktap-devel
 BuildRequires:  systemd-devel
 #Requires:       redhat-lsb-core
@@ -33,7 +25,6 @@ Requires:       libev
 Requires(pre):  shadow-utils
 
 %{?systemd_requires}
-
 
 %description
 Statistics gathering daemon for the xapi toolstack.
@@ -78,6 +69,16 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Tue Feb 28 2023 Pau Ruiz Safont <pau.ruizsafont@cloud.com> - 1.33.2-1
+- CA-371780: Reduce cost of merge_new_dss
+- CA-371780: Reduce overheads in update_rrdds
+- CA-371780: Port xcp-rrdd tests to alcotest
+- Change license to match the one in the source repo
+- Fix xen BuildReqs
+
+* Thu Oct 13 2022 Rob Hoes <rob.hoes@citrix.com> - 1.33.1-1
+- CA-368579: Patches upstreamed
+
 * Thu Sep 08 2022 Rob Hoes <rob.hoes@citrix.com> - 1.33.0-6
 - CA-368579: Mitigations against DoS attacks by unauthenticated clients
 
@@ -268,7 +269,7 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 - Update to 1.0.0
 
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-2
-- Remove xen-missing-headers dependency 
+- Remove xen-missing-headers dependency
 
 * Wed Jun 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-1
 - Update to 0.9.7
