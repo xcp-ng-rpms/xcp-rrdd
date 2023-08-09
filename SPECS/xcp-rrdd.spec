@@ -1,8 +1,8 @@
-%global package_speccommit 8bfbe2378aac5b17ed94ba54e271a6701cef1618
+%global package_speccommit f0aee20fcff45bb041aa2ac177c7accbeed518d5
 %global package_srccommit v1.33.2
 Name:           xcp-rrdd
 Version: 1.33.2
-Release: 1%{?xsrel}%{?dist}
+Release: 6%{?xsrel}%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -69,6 +69,21 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Thu Jul 20 2023 Rob Hoes <rob.hoes@citrix.com> - 1.33.2-6
+- Bump release and rebuild
+
+* Mon Jun 19 2023 Christian Lindig <christian.lindig@citrix.com> - 1.33.2-5
+- Bump release and rebuild
+
+* Thu Jun 08 2023 Christian Lindig <christian.lindig@citrix.com> - 1.33.2-4
+- Bump release and rebuild
+
+* Fri May 12 2023 Christian Lindig <christian.lindig@citrix.com> - 1.33.2-3
+- Bump release and rebuild
+
+* Fri May 12 2023 Christian Lindig <christian.lindig@citrix.com> - 1.33.2-2
+- Bump release and rebuild
+
 * Tue Feb 28 2023 Pau Ruiz Safont <pau.ruizsafont@cloud.com> - 1.33.2-1
 - CA-371780: Reduce cost of merge_new_dss
 - CA-371780: Reduce overheads in update_rrdds
