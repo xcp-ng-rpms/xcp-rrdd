@@ -1,12 +1,12 @@
-%global package_speccommit 420854235a77b54e6a6b7f207a0e3cd30c1b5787
-%global package_srccommit v1.33.2
+%global package_speccommit 810a2f7f7c83798d6fd50f022de35883f8d6334e
+%global package_srccommit v1.33.4
 Name:           xcp-rrdd
-Version: 1.33.2
-Release: 7.1%{?xsrel}%{?dist}
+Version: 1.33.4
+Release: 4.1%{?xsrel}%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-rrdd
-Source0: xcp-rrdd-1.33.2.tar.gz
+Source0: xcp-rrdd-1.33.4.tar.gz
 Source1: xcp-rrdd.service
 Source2: xcp-rrdd-sysconfig
 Source3: xcp-rrdd-conf
@@ -53,6 +53,7 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %files
 %doc README.markdown LICENSE
 %{_sbindir}/xcp-rrdd
+%{_sbindir}/rrd-cli
 %{_unitdir}/xcp-rrdd.service
 %config(noreplace) %{_sysconfdir}/sysconfig/xcp-rrdd
 %config(noreplace) %{_sysconfdir}/xcp-rrdd.conf
@@ -69,6 +70,24 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Tue Jun 04 2024 Gael Duperrey <gduperrey@vates.tech> - 1.33.4-4.1
+- Sync with hotfix XS82ECU1064
+- *** Upstream changelog ***
+- * Fri Mar 08 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-4
+- - Bump release and rebuild
+- * Wed Mar 06 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-3
+- - Bump release and rebuild
+- * Tue Mar 05 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-2
+- - Bump release and rebuild
+- * Fri Nov 03 2023 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-1
+- - CP-42182 Add CLI tool on xe and rrd-cli to enable saving of rrds to local host
+- * Tue Oct 24 2023 Christian Lindig <christian.lindig@cloud.com> - 1.33.3-3
+- - Bump release and rebuild
+- * Tue Oct 24 2023 Christian Lindig <christian.lindig@cloud.com> - 1.33.3-2
+- - Bump release and rebuild
+- * Wed Oct 18 2023 Christian Lindig <christian.lindig@cloud.com> - 1.33.3-1
+- - CP-42182 Add CLI tool on xe and rrd-cli to enable saving of rrds to local host
+
 * Fri Oct 13 2023 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.33.2-7.1
 - Rebuild after sync with hotfix XS82ECU1049
 - No source changes: only rebuild for dependencies
