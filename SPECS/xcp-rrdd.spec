@@ -1,12 +1,12 @@
-%global package_speccommit 3015fabe0f1179d8d2da97074c8fff13c2319e37
-%global package_srccommit v1.33.4
+%global package_speccommit 4ee53859808ce656f6b36f0798478ad6b461b201
+%global package_srccommit v1.33.5
 Name:           xcp-rrdd
-Version: 1.33.4
-Release: 6%{?xsrel}%{?dist}
+Version: 1.33.5
+Release: 3%{?xsrel}%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-rrdd
-Source0: xcp-rrdd-1.33.4.tar.gz
+Source0: xcp-rrdd-1.33.5.tar.gz
 Source1: xcp-rrdd.service
 Source2: xcp-rrdd-sysconfig
 Source3: xcp-rrdd-conf
@@ -70,6 +70,21 @@ make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 %systemd_postun xcp-rrdd.service
 
 %changelog
+* Mon Dec 16 2024 Christian Lindig <christian.lindig@citrix.com> - 1.33.5-3
+- Udpate CHECKSUMs
+
+* Fri Dec 13 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.5-2
+- Bump release and rebuild
+
+* Fri Dec 13 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.5-1
+- CA-399183 fix rrd-cli execution
+
+* Thu Dec 12 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-8
+- Bump release and rebuild
+
+* Mon Dec 09 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-7
+- Bump release and rebuild
+
 * Thu Aug 29 2024 Christian Lindig <christian.lindig@cloud.com> - 1.33.4-6
 - Bump release and rebuild
 
